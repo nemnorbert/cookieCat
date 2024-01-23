@@ -1,0 +1,74 @@
+$zIndex: 9999;
+$minW: 250px;
+$maxW: 600px;
+$gap: 1em;
+$bordRad1: 30px;
+$colorMain: rgb(83, 83, 212);
+
+#cookie{
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    font-family: sans-serif;
+    position: absolute;
+    inset: 0;
+
+    .cookieBox {
+        display: none;
+        background-color: rgb(230, 230, 230);
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: clamp($minW, 100%, $maxW);
+        position: absolute;
+        z-index: calc($zIndex + 1);
+        padding: $bordRad1;
+        flex-direction: column;
+        align-items: center;
+        text-align: justify;
+        gap: $gap;
+
+        .description {
+            line-height: 1.5em;
+        }
+        .buttons {
+            width: 100%;
+            display: flex;
+            gap: $gap;
+            justify-content: center;
+        }
+        .btn {
+            cursor: pointer;
+            background-color: $colorMain;
+            padding: 1em;
+            width: clamp(120px, 40%, 180px);
+            text-align: center;
+            border-radius: $bordRad1;
+            color: white;
+            font-weight: bold;
+        }
+    }
+    #cookieToggle {
+        cursor: pointer;
+        background-color: rgb(0, 255, 21);
+        border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        left: 1em;
+        bottom: 1em;
+        z-index: $zIndex;
+    }
+    .show {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: $maxW) {
+    .cookieBox {
+        border-radius: $bordRad1 $bordRad1 0 0;
+    }
+}
