@@ -19,6 +19,13 @@ class CookieCat extends HTMLElement {
                 all: initial;
                 contain: content;
             }
+            button {
+                background-color: rgb(36, 144, 194);
+                border: 0;
+                border-radius: 30px;
+                padding: .5em;
+                back
+            }
             #toggle {
                 position: fixed;
                 cursor: pointer;
@@ -49,34 +56,31 @@ class CookieCat extends HTMLElement {
         // Content
         const toggle = document.createElement('div')
         const panel = document.createElement('div')
-        const customBtn = document.createElement('b')
+        const settBtn = document.createElement('button')
         const applyAllBtn = document.createElement('button');
         const applyNecBtn = document.createElement('button');
 
         toggle.id = 'toggle';
         panel.id = 'panel';
-        customBtn.id = 'custom';
-        applyAllBtn.id = 'applyAll';
-        applyNecBtn.id = 'applyNec';
 
         panel.innerHTML = `<p>Ez a weboldal sütiket használ a működéshez</p>`;
-        customBtn.textContent = 'Részletek';
+        settBtn.textContent = 'Beállítások';
         applyAllBtn.textContent = 'Összes elfogadása';
         applyNecBtn.textContent = 'Kötelezők elfogadása';
 
-        panel.appendChild(customBtn);
+        panel.appendChild(settBtn);
         panel.appendChild(applyNecBtn);
         panel.appendChild(applyAllBtn);
 
         // Add to ShadowDOM
-        this.shadowRoot.appendChild(style);
-        this.shadowRoot.appendChild(toggle);
-        this.shadowRoot.appendChild(panel);
+        if (this.shadowRoot) {this.shadowRoot.appendChild(style)};
+        if (this.shadowRoot) {this.shadowRoot.appendChild(toggle);}
+        if (this.shadowRoot) {this.shadowRoot.appendChild(panel);}
 
         // Add Event Listener
         applyAllBtn.addEventListener("click", this.applyAll.bind(this));
         applyNecBtn.addEventListener("click", this.applyNec.bind(this));
-        customBtn.addEventListener("click", this.moreDetails.bind(this));
+        settBtn.addEventListener("click", this.settings.bind(this));
         toggle.addEventListener("click", () => {
             panel.classList.toggle("show");
         });
@@ -90,7 +94,7 @@ class CookieCat extends HTMLElement {
         console.log('kötelező elfogadása');
     }
 
-    moreDetails() {
+    settings() {
         console.log('részletek megnyitása');
     }
 }
